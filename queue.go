@@ -1,16 +1,16 @@
 /*
-    Package queue implements a non-blocking concurrent first-in-first-out queue
+	Package queue implements a non-blocking concurrent first-in-first-out queue
 
 	The algorithm, the same as the one used in ConcurrentLinkedQueue in Java,
 	is described in the paper:
 
 		Simple, Fast, and Practical Non-Blocking and Blocking 
-        Concurrent Queue Algorithms \Lambda 
-        Maged M. Michael Michael L. Scott 
-        Department of Computer Science 
-        University of Rochester 
-        Rochester, NY 14627-0226 
-        fmichael,scottg@cs.rochester.edu
+		Concurrent Queue Algorithms \Lambda 
+		Maged M. Michael Michael L. Scott 
+		Department of Computer Science 
+		University of Rochester 
+		Rochester, NY 14627-0226 
+		fmichael,scottg@cs.rochester.edu
 		http://www.cs.rochester.edu/u/scott/papers/1996_PODC_queues.pdf
 
 	The algorithm is the same used in ConcurrentLinkedQueue in Java
@@ -18,7 +18,7 @@
 	Modifications:
 	The original paper uses a counter and a CAS2 instruction to
 	avoid the ABA problem. Since CAS2 instructions is not available in Go,
-	the package	uses a hack similar to that used in Microsoft Invisible Computing:
+	the package uses a hack similar to that used in Microsoft Invisible Computing:
 
 		http://research.microsoft.com/en-us/um/redmond/projects/invisible/src/queue/queue.c.htm
 */
@@ -73,10 +73,10 @@ func (q *Queue) Enqueue(value interface{}) {
 // Dequeue returns the value at the head of the queue and true, or if the queue is empty, it returns a nil value and false
 func (q *Queue) Dequeue() (value interface{}, ok bool) {
 	for {
-		head := atomic.LoadPointer(&q.head)               // Read head pointer
-		tail := atomic.LoadPointer(&q.tail)               // Read tail pointer
+		head := atomic.LoadPointer(&q.head)			   // Read head pointer
+		tail := atomic.LoadPointer(&q.tail)			   // Read tail pointer
 		next := atomic.LoadPointer(&(*node_t)(head).next) // Read head.next
-		if head != q.head {                               // Check head, tail, and next consistency
+		if head != q.head {							   // Check head, tail, and next consistency
 			continue // Not consistent. Try again
 		}
 
