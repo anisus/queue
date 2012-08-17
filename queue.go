@@ -1,5 +1,7 @@
 /*
-    Package queue implements a non-blocking concurrent first-in-first-out queue algorithm
+    A non-blocking concurrent first-in-first-out queue package
+
+	Package queue implements a non-blocking concurrent first-in-first-out queue algorithm
 	as described in the paper:
         Simple, Fast, and Practical Non-Blocking and Blocking 
         Concurrent Queue Algorithms \Lambda 
@@ -10,6 +12,9 @@
         fmichael,scottg@cs.rochester.edu
 		http://www.cs.rochester.edu/u/scott/papers/1996_PODC_queues.pdf
 
+	The algorithm is the same used in ConcurrentLinkedQueue in Java
+
+	Modifications:
 	The original paper uses a counter and a CAS2 instruction to
 	avoid the ABA problem. Since CAS2 instructions is not available in Go,
 	the package	uses a hack similar to that used in Microsoft Invisible Computing:
