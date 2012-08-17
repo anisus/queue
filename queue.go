@@ -13,9 +13,8 @@
 		fmichael,scottg@cs.rochester.edu
 		http://www.cs.rochester.edu/u/scott/papers/1996_PODC_queues.pdf
 
-	The algorithm is the same used in ConcurrentLinkedQueue in Java
+	Modifications
 
-	Modifications:
 	The original paper uses a counter and a CAS2 instruction to
 	avoid the ABA problem. Since CAS2 instructions is not available in Go,
 	the package uses a hack similar to that used in Microsoft Invisible Computing:
